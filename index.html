@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanjula Rajat — Academic Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Special+Elite&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #11151C;
+      --fg: #F6F5F3;
+      --accent: #8B9EB7;
+      --muted: #6b7585;
+      --rule: #252b38;
+      --card: #181d27;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Special Elite', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    .page { max-width: 900px; margin: 0 auto; padding: 52px 40px 100px; }
+
+    /* HEADER */
+    header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding-bottom: 28px;
+      border-bottom: 2px solid var(--fg);
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .photo-wrap {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--rule);
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-wrap .photo-placeholder {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-align: center; padding: 8px; line-height: 1.4;
+    }
+    h1 {
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: clamp(28px, 5vw, 50px);
+      font-weight: 400; line-height: 1.05; letter-spacing: -0.5px;
+      color: var(--fg);
+    }
+    .title-label {
+      font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-top: 6px;
+    }
+    .contact-block {
+      text-align: right; color: var(--muted);
+      font-size: 11px; line-height: 2; align-self: end; padding-bottom: 4px;
+    }
+    .contact-block a { color: var(--accent); text-decoration: none; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    /* TABS */
+    .tabs {
+      display: flex; align-items: stretch;
+      margin-bottom: 44px; border-bottom: 1px solid var(--rule);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .tab-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Special Elite', monospace; font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); padding: 10px 22px 12px;
+      position: relative; transition: color 0.2s;
+    }
+    .tab-btn::after {
+      content: ''; position: absolute;
+      bottom: -1px; left: 0; right: 0; height: 2px;
+      background: var(--accent); transform: scaleX(0); transition: transform 0.25s ease;
+    }
+    .tab-btn:hover { color: var(--fg); }
+    .tab-btn.active { color: var(--fg); }
+    .tab-btn.active::after { transform: scaleX(1); }
+    .tab-btn.cv-tab {
+      margin-left: auto; color: var(--accent);
+      border: 1px solid var(--rule); border-bottom: none;
+      padding: 8px 20px 10px;
+      display: flex; align-items: center; gap: 7px;
+      border-radius: 3px 3px 0 0;
+      background: var(--card);
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn.cv-tab:hover { background: var(--rule); color: var(--fg); }
+    .tab-btn.cv-tab.active { background: var(--accent); color: var(--bg); }
+    .tab-btn.cv-tab.active::after { display: none; }
+    .tab-btn.cv-tab svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* PANELS */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeUp 0.4s ease forwards; }
+
+    /* SECTIONS */
+    section { margin-bottom: 44px; }
+    .section-label {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    .pull-quote {
+      font-family: 'Special Elite', monospace;
+      font-size: 14px; line-height: 1.8;
+      max-width: 680px;
+      border-left: 3px solid var(--accent); padding-left: 20px;
+      color: var(--fg);
+    }
+
+    /* ENTRIES */
+    .entry {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 0 28px; padding: 18px 0; border-bottom: 1px solid var(--rule);
+    }
+    .entry:last-child { border-bottom: none; }
+    .entry-meta { color: var(--muted); font-size: 11px; padding-top: 2px; line-height: 1.9; }
+    .entry-date { color: var(--accent); font-size: 11px; }
+    .entry-org { font-size: 11px; }
+    .entry-role {
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: 15px; font-weight: 400; margin-bottom: 5px; color: var(--fg);
+    }
+    .entry-desc { color: var(--muted); font-size: 12.5px; }
+
+    /* PUBLICATIONS */
+    .pub-entry { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+    .pub-entry:last-child { border-bottom: none; }
+    .pub-title {
+      font-family: 'Special Elite', monospace;
+      font-style: italic; font-size: 13.5px; margin-bottom: 4px; color: var(--fg);
+    }
+    .pub-meta { font-size: 11.5px; color: var(--muted); }
+    .pub-meta a { color: var(--accent); text-decoration: none; }
+    .pub-meta a:hover { text-decoration: underline; }
+    .pub-status {
+      display: inline-block; font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent);
+      border: 1px solid var(--accent); border-radius: 2px;
+      padding: 1px 6px; margin-left: 8px; vertical-align: middle;
+    }
+
+    /* TEACHING */
+    .course-entry {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 0 28px; padding: 16px 0; border-bottom: 1px solid var(--rule);
+    }
+    .course-entry:last-child { border-bottom: none; }
+    .course-code { font-size: 11px; color: var(--accent); }
+    .course-term { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .course-title {
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: 15px; font-weight: 400; margin-bottom: 4px; color: var(--fg);
+    }
+    .course-desc { font-size: 12px; color: var(--muted); }
+
+    /* CV DOWNLOAD */
+    .cv-panel {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 60px 20px; text-align: center; gap: 28px;
+    }
+    .cv-panel-icon {
+      width: 64px; height: 80px; background: var(--card);
+      border: 2px solid var(--rule); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .cv-panel-icon::before {
+      content: ''; position: absolute; top: -1px; right: -1px;
+      width: 18px; height: 18px; background: var(--bg);
+      border-left: 2px solid var(--rule); border-bottom: 2px solid var(--rule);
+    }
+    .cv-panel-icon svg { color: var(--accent); }
+    .cv-panel h2 { font-family: 'Hammersmith One', sans-serif; font-size: 22px; font-weight: 400; color: var(--fg); }
+    .cv-panel p { font-size: 12px; color: var(--muted); max-width: 380px; line-height: 1.8; }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--accent); color: var(--bg);
+      font-family: 'Special Elite', monospace; font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; padding: 13px 28px; border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .download-btn:hover { background: #6d84a0; transform: translateY(-1px); }
+    .download-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .cv-note { font-size: 11px; color: var(--muted); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 620px) {
+      .page { padding: 28px 18px 60px; }
+      header { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .contact-block { grid-column: 1 / -1; text-align: left; }
+      .photo-wrap { width: 72px; height: 72px; }
+      .entry, .course-entry { grid-template-columns: 1fr; gap: 4px; }
+      .tab-btn { padding: 10px 10px 12px; font-size: 9px; }
+      .tab-btn.cv-tab { padding: 8px 12px 10px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="photo-wrap">
+      <img src="photo.jpg" alt="Photo of Sanjula Rajat"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+      <span class="photo-placeholder" style="display:none;">Your<br/>Photo</span>
+    </div>
+    <div>
+      <h1>Sanjula Rajat</h1>
+      <p class="title-label">PhD Student · Philosophy &amp; WGSS · University of Oregon</p>
+    </div>
+    <div class="contact-block">
+      <a href="mailto:srajat@uoregon.edu">srajat@uoregon.edu</a><br/>
+      <a href="https://philpeople.org" target="_blank">PhilPeople</a><br/>
+      Eugene, Oregon
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="education">Education</button>
+    <button class="tab-btn" data-tab="research">Research</button>
+    <button class="tab-btn" data-tab="teaching">Teaching</button>
+    <button class="tab-btn cv-tab" data-tab="cv-download">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+      </svg>
+      CV
+    </button>
+  </nav>
+
+
+  <!-- ═══════════ EDUCATION ═══════════ -->
+  <div class="tab-panel active" id="education">
+
+    <section>
+      <div class="section-label">About</div>
+      <p class="pull-quote">
+        I work in feminist political philosophy. I research trans social reproduction, the philosophy of caste and caste-capitalism, and trans temporality and reproductive futurity. In my dissertation, I explore the stakes of trans reproduction and social reproduction for the material maintenance and circulation of caste and Hindu nationalism.
+      </p>
+      <p style="margin-top: 20px; font-size: 13px; color: var(--muted); max-width: 680px; padding-left: 23px;">
+        I am a PhD student in Philosophy and a Graduate Certificate student in Women's, Gender, and Sexuality Studies at the University of Oregon.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-label">Degrees</div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2023 — present</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Ph.D. in Philosophy</div>
+          <div class="entry-desc">Graduate Certificate in Women's, Gender, and Sexuality Studies</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2023 — 2025</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">M.A. in Philosophy</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2019 — 2023</div>
+          <div class="entry-org">Rollins College</div>
+        </div>
+        <div>
+          <div class="entry-role">B.A. Honors in Philosophy &amp; Sociology</div>
+          <div class="entry-desc">Summa cum laude · Minor in Sexuality, Women's &amp; Gender Studies</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Honors &amp; Awards</div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2026</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Global Oregon Graduate Research Award</div>
+          <div class="entry-desc">Global Studies Institute</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2025</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Graduate Student Research Grant</div>
+          <div class="entry-desc">Center for the Study of Women and Society</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2025</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Martha Thorsland Baker Fellowship</div>
+          <div class="entry-desc">Special Collections and University Archives</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2024</div>
+          <div class="entry-org">SPEP</div>
+        </div>
+        <div>
+          <div class="entry-role">Kyoo "Q" Lee Prize for Best Paper on LGBTQ Issues in Philosophy</div>
+          <div class="entry-desc">Society for Phenomenology and Existential Philosophy</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2024</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Miller Family Scholarship</div>
+          <div class="entry-desc">Women's Gender, and Sexuality Studies Department</div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <div class="entry-date">2024</div>
+          <div class="entry-org">University of Oregon</div>
+        </div>
+        <div>
+          <div class="entry-role">Philosophy Matters Prize</div>
+          <div class="entry-desc">Philosophy Department</div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ═══════════ RESEARCH ═══════════ -->
+  <div class="tab-panel" id="research">
+
+    <section>
+      <div class="section-label">Publications</div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Lives in Limbo: Trans Temporalities and the Phenomenology of Waiting</div>
+        <div class="pub-meta">
+          Rajat, Sanjula. <em>Journal of Speculative Philosophy</em> 39(3): 296–309.
+          <span class="pub-status">2025</span>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Biopolitics and Reproductive Injustice: The Medicalization of Reproduction and Transition</div>
+        <div class="pub-meta">
+          *McLaren, Margaret A. and Sanjula Rajat. <em>Revista Ideação</em> 51: 59–81.
+          <span class="pub-status">2025</span>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Decolonial Trans Futurity: A Trans of Color Critique of Normative Assimilation</div>
+        <div class="pub-meta">
+          Rajat, Sanjula and Billie Waller. <em>APA Studies on Feminism and Philosophy</em> 24(1): 29–38.
+          <span class="pub-status">2024</span>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Decolonial Reproductive Justice: Analyzing Reproductive Oppression in India</div>
+        <div class="pub-meta">
+          Rajat, Sanjula and Margaret A. McLaren. <em>Feminist Formations</em> 35(2): 78–105.
+          <span class="pub-status">2023</span>
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <div class="section-label">Works in Progress</div>
+
+      <div class="pub-entry">
+        <div class="pub-title">The Colonial Politics of Impurity: Gender, Caste, and Capital in the Consolidation of a Hindu Nation-State</div>
+        <div class="pub-meta"><span class="pub-status">In Progress</span></div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Hindutva, Homonationalism, and Hijras: Queer Activism and the State</div>
+        <div class="pub-meta">With co-author Margaret McLaren. <span class="pub-status">In Progress</span></div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Hindu Nationalism, Reproductive Justice, and the Politics and Possibilities of Trans Reproduction in India</div>
+        <div class="pub-meta">Invited. <span class="pub-status">In Progress</span></div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">Queer World-Making as Social Reproduction: A Trans Marxist Analysis of Expropriation and Disavowal</div>
+        <div class="pub-meta"><span class="pub-status">In Progress</span></div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ═══════════ TEACHING ═══════════ -->
+  <div class="tab-panel" id="teaching">
+
+    <section>
+      <div class="section-label">Teaching Philosophy</div>
+      <p class="pull-quote">
+        I try to cultivate a classroom where students feel comfortable being unsure or wrong when they answer, learn communally, and value their own and each other's lived experiences as an entrypoint into philosophy. When students are able to make connections between concepts and thinkers, and discover ideas themselves and through engagement with each other, they understand their capacity to engage in critical thought and to do philosophy. Making space for a diversity of voices, and responding to the need for a diversity of teaching practices allows me to build a space where students are empowered to question and critique, and most importantly, recognize themselves not just as recipients but active agents in their own education and as creators of knowledge in their own right.
+      </p>
+    </section>
+
+    <section>
+      <div class="section-label">Past Courses</div>
+
+      <div class="course-entry">
+        <div>
+          <div class="course-code">PHIL 170</div>
+          <div class="course-term">Summer 2025</div>
+        </div>
+        <div>
+          <div class="course-title">Philosophy of Love &amp; Sex</div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- ═══════════ CV DOWNLOAD ═══════════ -->
+  <div class="tab-panel" id="cv-download">
+    <div class="cv-panel">
+
+      <div class="cv-panel-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+
+      <h2>Curriculum Vitae</h2>
+
+      <p>
+        Download a full copy of my CV, including complete publication list,
+        conference presentations, grants, and service record.
+      </p>
+
+      <a href="cv.pdf" download class="download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download CV (PDF)
+      </a>
+
+      <span class="cv-note">PDF</span>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
