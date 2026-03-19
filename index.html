@@ -231,7 +231,7 @@
       <p class="title-label">PhD Student · Philosophy &amp; WGSS · University of Oregon</p>
     </div>
     <div class="contact-block">
-      <a href="/cdn-cgi/l/email-protection#097a7b6863687d497c667b6c6e6667276c6d7c"><span class="__cf_email__" data-cfemail="addedfccc7ccd9edd8c2dfc8cac2c383c8c9d8">[email&#160;protected]</span></a><br/>
+      <a href="mailto:srajat@uoregon.edu">srajat@uoregon.edu</a><br/>
       <a href="https://philpeople.org/profiles/sanjula-rajat" target="_blank">PhilPeople</a><br/>
       Eugene, Oregon
     </div>
@@ -507,9 +507,17 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const btns = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach
+      btns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
