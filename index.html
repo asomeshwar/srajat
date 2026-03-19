@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sanjula Rajat — Academic Site</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Special+Elite&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -19,7 +19,7 @@
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: 'Special Elite', monospace;
+      font-family: 'DM Mono', monospace;
       font-size: 13px;
       line-height: 1.8;
       min-height: 100vh;
@@ -52,7 +52,7 @@
       color: var(--muted); text-align: center; padding: 8px; line-height: 1.4;
     }
     h1 {
-      font-family: 'Hammersmith One', sans-serif;
+      font-family: 'Kanit', sans-serif;
       font-size: clamp(28px, 5vw, 50px);
       font-weight: 400; line-height: 1.05; letter-spacing: -0.5px;
       color: var(--fg);
@@ -76,7 +76,7 @@
     }
     .tab-btn {
       background: none; border: none; cursor: pointer;
-      font-family: 'Special Elite', monospace; font-size: 10px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
       letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--muted); padding: 10px 22px 12px;
       position: relative; transition: color 0.2s;
@@ -117,7 +117,8 @@
     .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
 
     .pull-quote {
-      font-family: 'Special Elite', monospace;
+      font-family: 'Kanit', sans-serif;
+      font-weight: 400;
       font-size: 14px; line-height: 1.8;
       max-width: 680px;
       border-left: 3px solid var(--accent); padding-left: 20px;
@@ -134,7 +135,7 @@
     .entry-date { color: var(--accent); font-size: 11px; }
     .entry-org { font-size: 11px; }
     .entry-role {
-      font-family: 'Hammersmith One', sans-serif;
+      font-family: 'Kanit', sans-serif;
       font-size: 15px; font-weight: 400; margin-bottom: 5px; color: var(--fg);
     }
     .entry-desc { color: var(--muted); font-size: 12.5px; }
@@ -143,7 +144,7 @@
     .pub-entry { padding: 16px 0; border-bottom: 1px solid var(--rule); }
     .pub-entry:last-child { border-bottom: none; }
     .pub-title {
-      font-family: 'Special Elite', monospace;
+      font-family: 'DM Mono', monospace;
       font-style: italic; font-size: 13.5px; margin-bottom: 4px; color: var(--fg);
     }
     .pub-meta { font-size: 11.5px; color: var(--muted); }
@@ -165,7 +166,7 @@
     .course-code { font-size: 11px; color: var(--accent); }
     .course-term { font-size: 11px; color: var(--muted); line-height: 1.5; }
     .course-title {
-      font-family: 'Hammersmith One', sans-serif;
+      font-family: 'Kanit', sans-serif;
       font-size: 15px; font-weight: 400; margin-bottom: 4px; color: var(--fg);
     }
     .course-desc { font-size: 12px; color: var(--muted); }
@@ -186,12 +187,12 @@
       border-left: 2px solid var(--rule); border-bottom: 2px solid var(--rule);
     }
     .cv-panel-icon svg { color: var(--accent); }
-    .cv-panel h2 { font-family: 'Hammersmith One', sans-serif; font-size: 22px; font-weight: 400; color: var(--fg); }
+    .cv-panel h2 { font-family: 'Kanit', sans-serif; font-size: 22px; font-weight: 400; color: var(--fg); }
     .cv-panel p { font-size: 12px; color: var(--muted); max-width: 380px; line-height: 1.8; }
     .download-btn {
       display: inline-flex; align-items: center; gap: 9px;
       background: var(--accent); color: var(--bg);
-      font-family: 'Special Elite', monospace; font-size: 10px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
       letter-spacing: 0.18em; text-transform: uppercase;
       text-decoration: none; padding: 13px 28px; border-radius: 2px;
       transition: background 0.2s, transform 0.15s;
@@ -230,7 +231,7 @@
       <p class="title-label">PhD Student · Philosophy &amp; WGSS · University of Oregon</p>
     </div>
     <div class="contact-block">
-      <a href="mailto:srajat@uoregon.edu">srajat@uoregon.edu</a><br/>
+      <a href="/cdn-cgi/l/email-protection#097a7b6863687d497c667b6c6e6667276c6d7c"><span class="__cf_email__" data-cfemail="addedfccc7ccd9edd8c2dfc8cac2c383c8c9d8">[email&#160;protected]</span></a><br/>
       <a href="https://philpeople.org/profiles/sanjula-rajat" target="_blank">PhilPeople</a><br/>
       Eugene, Oregon
     </div>
@@ -506,17 +507,9 @@
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const btns = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    });
-  });
-</script>
-</body>
-</html>
+      btns.forEach
